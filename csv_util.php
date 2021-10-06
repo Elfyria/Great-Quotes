@@ -55,7 +55,7 @@ function huntMan(string $selector, bool $mode) {
 function saveMan(array &$phpMan, string $quotes) : void {
     if (file_exists($quotes)) {                                                   //ensure file exists
         //this is where input validation for the array would take place
-        file_put_contents($quotes);                            //put to file
+        file_put_contents($phpMan, $quotes);                            //put to file
     } else {
         echo "File \"".$quotes."\" not found.";                                   //if file doesn't exist...
         die();                                                                      //die
