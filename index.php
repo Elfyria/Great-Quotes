@@ -18,9 +18,6 @@
     <!--import something idk-->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
-    <!--link to index's css-->
-    <link rel="stylesheet" href="assets/css/index.css"/>
-
     <!--import bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
@@ -28,6 +25,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
 
     <!--import bootstrap javascript-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
@@ -83,34 +84,31 @@
             content: "create";
         }
     </style>
-    <title>ASE 230 - Fall 2021</title>
+    <title>Directory of Great Quotes</title>
 
 </head>
 
-<body class="mt-0">
-<nav class="mt-0 p-0 navbar sticky-top bg-dark container-fluid d-flex flex-nowrap">
-    <!--title-->
-    <h2 class="text-light ml-2 ml-lg-4 text-wrap w-50">
-        <a href="./index.php" class="bi bi-house-fill text-light"></a>
-        ASE 230 - <span class="text-muted">Fall 2021</span>
-    </h2>
-    <!--shape on right of navbar-->
-    <div class="my-0 overflow-hidden align-self-end w-25 h-100 align-self-stretch"
-         style="
-            border-left: 100px solid transparent;
-            border-top: 100px solid #3434a9;">
-    </div>
-</nav>
+<body class="mt-0 bg-light">
+<!--bring in shrinker for header-->
+<a href="./index.php" class="text-decoration-none">
+    <nav class="mt-0 p-0 navbar sticky-top container-fluid d-flex flex-nowrap bg-dark">
+        <!--title-->
+        <h2 class="text-light ml-2 ml-lg-4 text-wrap w-50 display-3" style="font-family: Prompt">
+            Great Quotes
+        </h2>
+        <!--shape on right of navbar-->
+    </nav>
+
+</a>
 <div class="container">
     <!-- holds cards -->
-    <div class="row mt-5">
+    <div class="row mt-5 w-75">
         <?php
         //card loader
-        $studentArray = fileFetcher("csv_util.php");
-        cardLoader($studentArray);
+        $quotesArray = fileFetcher("./assets/csv/quotes.csv");
+        cardLoader($quotesArray);
         ?>
     </div>
-
     <!-- button for create -->
     <a href="create.php">
         <button class="btn btn-outline-dark rounded-pill text-center text-nowrap

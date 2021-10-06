@@ -9,18 +9,13 @@
         die("No entry provided.<br><br><a href='index.php'>Return to main page</a>");
     }
 
-    $theOne = huntMan($_GET["id"], true);
-
-
-    if (!($theOne instanceof stdClass)) {
-        die("User with ID \"".$_GET["id"]."\" not found.<br><br><a href='index.php'>Return to main page</a>");
-    }
+    $theOne = huntMan($_GET["id"], false);
     ?>
 
     <!-- https://www.bootdey.com/snippets/view/team-user-resume#html -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ASE 230 - <?= $theOne->{"name"} ?></title>
+    <title>Great Quote -- <?= $theOne[2][0], ' ', $theOne[2][1]?> </title>
 
     <!--import jquery-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -42,89 +37,43 @@
 
     <!--import bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/css/detail.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
 </head>
 
 <body class="mt-0">
-<nav class="mt-0 p-0 navbar sticky-top bg-dark container-fluid d-flex flex-nowrap">
-    <!--title-->
-    <h2 class="text-light ml-2 ml-lg-4 text-wrap w-auto">
-        <a href="./index.php" class="bi bi-house-fill text-light"></a>
-        ASE 230 - <span class="text-muted"><?= $theOne->{"name"} ?></span>
-    </h2>
-    <!--shape on right of navbar-->
-    <div class="btn-group mr-3 d-flex flex-column flex-md-row">
-        <a class="btn btn-dark" href='modify.php?id=<?= $theOne->{"key"} ?>'>
-            <span class="bi bi-pencil-fill"></span><br>
-            Modify
-        </a>
-        <!-- So this setup doesn't look great, but it looks a lot better than the alternative imo -->
-        <a class="btn btn-dark" href='delete.php?id=<?= $theOne->{"key"} ?>'>
-            <span class="bi bi-trash-fill"></span><br>
-            Delete
-        </a>
-    </div>
-</nav>
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-lg-5 col-md-6">
-            <div class="mb-2">
-                <img class="w-100" src="<?= $theOne->{"img"} ?>"
-                     alt="bink">
-            </div>
-            <div class="mb-2 d-flex">
-                <h4 class="font-weight-normal"><?= $theOne->{"name"} ?></h4>
-                <div class="social d-flex ml-auto">
-                    <p class="pr-2 font-weight-normal">Follow on:</p>
-                    <a href="<?= $theOne->{"facebook"} ?>" class="text-muted mr-1">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="<?= $theOne->{"twitter"} ?>" class="text-muted mr-1">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="<?= $theOne->{"instagram"} ?>" class="text-muted mr-1">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="<?= $theOne->{"linkedIn"} ?>" class="text-muted">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="mb-2">
-                <ul class="list-unstyled">
-                    <li class="media">
-                        <span class="w-25 text-black font-weight-normal">Dream profession:</span>
+<a href="./index.php" class="text-decoration-none">
+    <nav class="mt-0 p-0 navbar sticky-top bg-dark container-fluid d-flex flex-nowrap">
+        <!--title-->
+        <h2 class="text-light ml-2 ml-lg-4 text-wrap w-auto display-3" style="font-family: Prompt">
+            Great Quote
+            <div class="h4 mt-0 text-secondary ml-2">from <?= $theOne[2][0], ' ', $theOne[2][1]?></div>
+        </h2>
+        <!--shape on right of navbar-->
+        <div class="btn-group mr-3 d-flex flex-column h-100 flex-md-row">
+            <a class="btn btn-dark" href='modify.php?id=<?= $theOne[1] ?>'>
+                <span class="bi bi-pencil-fill"></span><br>
+                Modify
+            </a>
+            <!-- So this setup doesn't look great, but it looks a lot better than the alternative imo -->
+            <a class="btn btn-dark" href='delete.php?id=<?= $theOne[1] ?>'>
+                <span class="bi bi-trash-fill"></span><br>
+                Delete
+            </a>
+        </div>
+    </nav>
 
-                        <label class="media-body"><?= $theOne->{"dProfession"} ?></label>
-                    </li>
-                    <li class="media">
-                        <span class="w-25 text-black font-weight-normal">Dream company: </span>
-                        <label class="media-body"><?= $theOne->{"dCompany"} ?></label>
-                    </li>
-                    <li class="media">
-                        <span class="w-25 text-black font-weight-normal">Email: </span>
-                        <label class="media-body"><?= $theOne->{"email"} ?></label>
-                    </li>
-                    <?php chronos($theOne->{"DOB"}); ?>
-                </ul>
-            </div>
-        </div>
-        <div class="col-lg-7 col-md-6 pl-xl-3">
-            <h5 class="font-weight-normal">Short intro</h5>
-            <p><?= $theOne->{"intro"} ?></p>
-            <div class="my-2 bg-light p-2">
-                <p class="blockquote mb-0"><?= $theOne->{"quote"} ?></p>
-            </div>
-            <div class="mb-2 mt-2 pt-1">
-                <h5 class="font-weight-normal">Top skills</h5>
-            </div>
-            <?php
-            skillbar($theOne->{"skills"});
-            ?>
-            <h5 class="font-weight-normal">Fun fact</h5>
-            <p><?= $theOne->{"funfact"} ?></p>
-        </div>
-    </div>
+</a>
+<div class="container mt-4 d-flex">
+    <figure class="bg-light p-4 text-center align-self-center">
+        <blockquote class="blockquote">
+            <?= $theOne[0] ?>
+        </blockquote>
+        <figcaption class="blockquote-footer">
+            <?= $theOne[2][0], ' ', $theOne[2][1] ?> in <cite title="Source Title">Source Title</cite>
+        </figcaption>
+    </figure>
 </div>
 </body>
 

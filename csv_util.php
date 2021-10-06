@@ -33,17 +33,17 @@ function makeMan(string $quote, string $author, string $address) : void {
  * @PARAM $mode bool Switch var for the return value. If true, returns the user. If false, returns the index.
  * @return mixed returns reference to an array or index if found, if not, returns -1
  **/
-function huntMan(string $selector, bool $mode) {
-    $csvMan = fileFetcher("csv_util.php");       //get the array
-    $retMan = -1;                                                   //establish return var
-    for ($i = 0; $i < count($phpMan); $i++) {                       //otherwise loop through array
-        if (strcmp($phpMan[$i]->{'key'}, $selector) == 0) {         //if the current key matches the selector
-            $retMan = ($mode == true)? $phpMan[$i] : $i;            //set retman as the entry for return
-            break;
-        }
+function huntMan(string $selector) {
+    $csvMan = fileFetcher("./assets/csv/quotes.csv");       //get the array
+    $authMan = fileFetcher("./assets/csv/authors.csv");       //get the array
+    if ($selector >= count($csvMan) || $selector < 0) {
+        die("invalid selector");
     }
 
-    return $retMan;
+    $theLad = $csvMan[$selector];
+    array_push($theLad, $authMan[$theLad[1]]);
+
+    return $theLad;
 }
 
 /**

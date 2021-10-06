@@ -2,54 +2,45 @@
 /**
  * Main cardloader function, called from within index.php.
  * Loops through array and sends each student entry through the helper function for display.
- * @PARAM &$studentArray array reference to an associative array whose data will be displayed.
+ * @PARAM &$quotesArray array reference to an associative array whose data will be displayed.
  **/
-function cardLoader(array &$studentArray) : void {
-    $len = count($studentArray);                                    //determine length
+function cardLoader(array &$quotesArray) : void {
+    $len = count($quotesArray);                                    //determine length
     for ($i = 0; $i < $len; $i++) {
-        cardLoaderHelper($studentArray[$i]);        //send current entry to helper
+        cardLoaderHelper($quotesArray[$i]);        //send current entry to helper
     }
 }
 
 /**
  * Echoes a card for a student. Card links to detail.php with $key as the query variable "id".
  * Card includes button for delete.php set up the same way as the detail link
- * @param &$student object for a specific student
- **/
-function cardLoaderHelper(Object &$student) : void {
-    echo '<div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                <div class="advisor_thumb">
-                    <a href="detail.php?id=', $student->{"key"}, '">
-                        <img class="" src="', $student->{"img"}, '" alt="" style = "width: 100%; height 315px; overflow:hidden;">
-                    </a>
-                    <div class="social-info">
-                        <a href="', $student->{"facebook"}, '">
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="', $student->{"twitter"}, '">
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="', $student->{"linkedIn"}, '">
-                            <i class="fa fa-linkedin"></i>
-                        </a>
+ * @param array $quote
+ */
+function cardLoaderHelper(array &$quote) : void {
+    $author = authHunter($quote[1]);
+    echo '<a href="detail.php?id=', $quote[1] ,'" class=" w-100 text-decoration-none">
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <!--placeholder for initials, to be intro\'d later-->
+                        <img src="..." class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="card-text text-dark">',$quote[0],'</p>
+                            <h5 class="card-title text-dark">', $author[0] ,' ',$author[1] , '</h5>
+                        </div>
                     </div>
                 </div>
-                <div class="single_advisor_details_info">
-                    <h6>', $student->{"name"}, '</h6>
-                    <p class="designation">', $student->{"job"}, '</p>
-                    <div>';
-                for ($i = 0; $i < $student->{"year"}; $i++) {
-                    echo '<span class="h5 bi-slash-lg"></span>';                //loop displays a slash for each year
-                }
-                    echo "<ul>";
-                        chronos($student->{"DOB"});
-                    echo "</ul>";
-             echo '</div>
-               </div>
             </div>
-          </div>';
+    </a>';
 
+}
+
+function authHunter(int $aID) {
+    require_once("csv_util.php");
+    $authRay = fileFetcher("./assets/csv/authors.csv");
+    return $authRay[$aID];
 }
 
 /**
