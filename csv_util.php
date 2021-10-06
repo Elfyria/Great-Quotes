@@ -49,15 +49,15 @@ function huntMan(string $selector, bool $mode) {
 /**
  * Saves an array into a file, no return
  * @param $phpMan array
- * @param string $csvutil file path to a file which must already exist.
+ * @param string $quotes file path to a file which must already exist.
  * @return void
  */
-function saveMan(array &$phpMan, string $csvutil) : void {
-    if (file_exists($csvutil)) {                                                   //ensure file exists
+function saveMan(array &$phpMan, string $quotes) : void {
+    if (file_exists($quotes)) {                                                   //ensure file exists
         //this is where input validation for the array would take place
-        file_put_contents($csvutil);                            //put to file
+        file_put_contents($quotes);                            //put to file
     } else {
-        echo "File \"".$csvutil."\" not found.";                                   //if file doesn't exist...
+        echo "File \"".$quotes."\" not found.";                                   //if file doesn't exist...
         die();                                                                      //die
     }
 }
@@ -67,7 +67,7 @@ function saveMan(array &$phpMan, string $csvutil) : void {
  * @param $id string ID representing a key for a user in the database (e.g. DG1).
  */
 function thanosMan(string $id) : void {
-    $rayMan = fileFetcher("csv_util.php");               //fetch array of users
+    $rayMan = fileFetcher("quotes.csv");               //fetch array of users
     for($i = 0; $i < count($rayMan); $i++) {                                //loop through the array until...
         if($rayMan[$i]->{'key'} == $id){                                    //...the key that matches the id is found
             /*
@@ -77,7 +77,7 @@ function thanosMan(string $id) : void {
             $preMan = array_slice($rayMan,0, $i);                     //slice part of array before removed user
             $newMan = array_splice($rayMan, $i + 1);            //splice element out of array, leaving latter half
             $rayMan = array_merge($preMan, $newMan);                        //merge together into full array
-            saveMan($rayMan, "csv_util.php");   //send new array to saveMan to be saved
+            saveMan($rayMan, "quotes.csv");   //send new array to saveMan to be saved
             break;
         }
     }
@@ -88,7 +88,7 @@ function thanosMan(string $id) : void {
  * @param string $id ID representing a key for a user in a database (e.g. DG1)
  */
 function modMan(string $id) : void {
-    $theClass = fileFetcher("csv_util.php");            //get the class array
+    $theClass = fileFetcher("quotes.csv");            //get the class array
     $theSubject = huntMan($id, false);                               //get the user index
     if ($theSubject == -1) {                                                // if file doesn't exist
         echo "Entry \"".$id."\" not found.";                                //let user know,
@@ -96,6 +96,6 @@ function modMan(string $id) : void {
     } else {                                                                //otherwise, proceed normally
         $theClass[$theSubject]->{"name"} = "Pablo Diego José Francisco de Paula Juan Nepomuceno María de los Remedios Cipriano de la Santísima Trinidad Ruiz y Picasso";
         //push celebrity name ^
-        saveMan($theClass, "csv_util.php");    //save to csv
+        saveMan($theClass, "quotes.csv");    //save to csv
     }
 }
