@@ -4,7 +4,7 @@
 <head>
     <?php
     require_once("functions.php");
-    require_once("json_util.php");
+    require_once("csv_util.php");
     ?>
 
     <!-- https://www.bootdey.com/snippets/view/single-advisor-profile#html -->
@@ -106,7 +106,7 @@
     <div class="row mt-5">
         <?php
         //card loader
-        $studentArray = fileFetcher("/assets/JSON/class.json");
+        $studentArray = fileFetcher("csv_util.php");
         cardLoader($studentArray);
         ?>
     </div>
