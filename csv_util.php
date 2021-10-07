@@ -125,4 +125,5 @@ function deleteLine($id,$line){
     for($i=$line+1;count($csvarr)>$i;$i++){
         $newarr[$i-1]=$csvarr[$i];
     }
+    return $csvarr[$line];
 }
