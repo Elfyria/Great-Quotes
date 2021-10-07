@@ -99,7 +99,7 @@ function modMan(string $id) : void {
         saveMan($theClass, "quotes.csv");    //save to csv
     }
 }
-}function modifyLine($id,$line,$mod){
+function modifyLine($id,$line,$mod){
     $csvarr=fileFetcher($id);
     if(count($csvarr)<$line){
         echo "This line does not exist,". $line .",please try again.";
