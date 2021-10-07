@@ -1,11 +1,8 @@
 <?php
 require_once("csv_util.php");
 
-if(count($_GET)){                                                           //check if GET var has values
-    thanosMan($_GET["id"]);
-} else {
-    die("No entry provided.<br><br><a href='index.php'>Return to main page</a>");
-}
+$ret=deleteLine($_POST["id"],$_POST["line"]);
+echo '"'.$ret.'", was deleted';
 //regardless of if, redirect to index.php via javascript
 ?>
 
