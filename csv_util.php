@@ -99,3 +99,30 @@ function modMan(string $id) : void {
         saveMan($theClass, "quotes.csv");    //save to csv
     }
 }
+}function modifyLine($id,$line,$mod){
+    $csvarr=fileFetcher($id);
+    if(count($csvarr)<$line){
+        echo "This line does not exist,". $line .",please try again.";
+        die();
+    }
+    $csvarr[$line]=$mod;
+    file_put_contents($id,$csvarr);
+}
+function emptyLine($id,$line){
+    modifyLine($id,$line,"");
+
+}
+function deleteLine($id,$line){
+    $csvarr=fileFetcher($id);
+    $newarr=[];
+    if(count($csvarr)<$line){
+        echo "This line does not exist,". $line .",please try again.";
+        die();
+    }
+    for($i=0;$line>$i;$i++){
+        $newarr[$i]=$csvarr[$i];
+    }
+    for($i=$line+1;count($csvarr)>$i;$i++){
+        $newarr[$i-1]=$csvarr[$i];
+    }
+}
