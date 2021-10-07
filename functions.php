@@ -23,7 +23,7 @@ function cardLoaderHelper(array &$quote) : void {
                 <div class="row g-0">
                     <div class="col-md-4">
                         <!--placeholder for initials, to be intro\'d later-->
-                        <img src="..." class="img-fluid rounded-start" alt="...">
+                        <img src="', $author[2] ,'" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
