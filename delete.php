@@ -1,8 +1,8 @@
 <?php
-require_once("csv_util.php");
+require_once("csv_util.php");// gets csv utils.
 
-$ret=deleteLine($_POST["id"],$_POST["line"]);
-echo '"'.$ret.'", was deleted';
+$ret=deleteLine($_POST["id"],$_POST["line"]);// uses delete line function to delete the line at $_POST["line"] for the file $_POST["id"].
+echo '"'.$ret.'", was deleted';// says ""(Quote)", was deleted".
 //regardless of if, redirect to index.php via javascript
 ?>
 
