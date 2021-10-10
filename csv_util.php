@@ -100,30 +100,31 @@ function modMan(string $id) : void {
     }
 }
 function modifyLine($id,$line,$mod){
-    $csvarr=fileFetcher($id);
+    $csvarr=fileFetcher($id);// gets the file, $id, as an array.
     if(count($csvarr)<$line){
-        echo "This line does not exist,". $line .",please try again.";
+        echo "This line does not exist, ". $line .",please try again.";
         die();
-    }
-    $csvarr[$line]=$mod;
-    file_put_contents($id,$csvarr);
-}
+    }// if $line is to large, reads "This line does not exist, (line number), please try again."
+    $csvarr[$line][0]=$mod;//sets the line to $mod.
+    saveMan($csvarr,$id);//puts array into $id.
+}// takes $mod and puts it at $line in the file $id.
 function emptyLine($id,$line){
-    modifyLine($id,$line,"");
+    modifyLine($id,$line,"");//modifys line with empty string.
 
-}
+}//Makes line contain nothing.
 function deleteLine($id,$line){
-    $csvarr=fileFetcher($id);
-    $newarr=[];
+    $csvarr=fileFetcher($id);// gets the file, $id, as an array.
+    $newarr=[];//initializes new array.
     if(count($csvarr)<$line){
         echo "This line does not exist,". $line .",please try again.";
         die();
-    }
+    }}// if $line is to large, reads "This line does not exist, (line number), please try again."
     for($i=0;$line>$i;$i++){
         $newarr[$i]=$csvarr[$i];
-    }
+    }// adds $csvarr[$i] to $newarr[$i] before $line.
     for($i=$line+1;count($csvarr)>$i;$i++){
         $newarr[$i-1]=$csvarr[$i];
-    }
-    return $csvarr[$line];
-}
+    }// accounts for $line being removed by adding $csvarr[$i] to $newarr[$i-1].
+    saveMan($newarr,$id);//puts array into $id.
+    return $csvarr[$line];//returns line removed to display later.
+}//removes $line from file $id.
