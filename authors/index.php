@@ -4,7 +4,7 @@
 <head>
     <?php
     require_once("functions.php");
-    require_once("csv_util.php");
+    require_once("./csv_util.php");
     ?>
 
     <!-- https://www.bootdey.com/snippets/view/single-advisor-profile#html -->
@@ -81,7 +81,6 @@
         <h2 class="text-light ml-2 ml-lg-4 text-wrap w-auto display-4" style="font-family: Prompt">
             Great Quotes
         </h2>
-        <a href="./authors/index.php" class="btn btn-outline-primary mr-2">Show Authors</a>
     </nav>
 </a>
 <div class="container">
