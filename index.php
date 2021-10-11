@@ -36,36 +36,12 @@
     </script>
 
     <style>
-        .single_advisor_profile:hover .bi-slash-lg {
-            -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-            color: #FFFFFF;
-        }
-
-        .single_advisor_profile .bi-slash-lg {
-            -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-        }
-
-        .single_advisor_profile:hover ul {
-            -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-            color: #FFFFFF;
-        }
-
-        .single_advisor_profile ul {
-            -webkit-transition-duration: 500ms;
-            transition-duration: 500ms;
-        }
-
         #createButton {
             right: 5%;
             bottom: 5%;
             width: 3rem;
             height: 3rem;
             z-index: 5;
-            border-color: #070a57;
-            color: #070a57;
             transition: all 0.25s ease-in-out;
             -webkit-transition: all 0.25s ease-in-out;
             -moz-transition: all 0.25s ease-in-out;
@@ -73,8 +49,6 @@
 
         #createButton:hover {
             width: 7rem;
-            background-color: #070a57;
-            color: white;
             transition: all 0.25s ease-in-out;
             -webkit-transition: all 0.25s ease-in-out;
             -moz-transition: all 0.25s ease-in-out;
@@ -83,26 +57,35 @@
         #createButton:hover::after {
             content: "create";
         }
+
+        .my-img-class {
+            width: auto;
+            max-height: 90%;
+        }
+
+        @media screen and (max-width:769px) {
+            .my-img-class {
+                height: auto;
+                max-width: 90%;
+            }
+        }
     </style>
     <title>Directory of Great Quotes</title>
 
 </head>
 
 <body class="mt-0 bg-light">
-<!--bring in shrinker for header-->
 <a href="./index.php" class="text-decoration-none">
-    <nav class="mt-0 p-0 navbar sticky-top container-fluid d-flex flex-nowrap bg-dark">
+    <nav class="mt-0 px-1 navbar sticky-top container-fluid d-flex flex-nowrap bg-dark">
         <!--title-->
-        <h2 class="text-light ml-2 ml-lg-4 text-wrap w-50 display-3" style="font-family: Prompt">
+        <h2 class="text-light ml-2 ml-lg-4 text-wrap w-auto display-4" style="font-family: Prompt">
             Great Quotes
         </h2>
-        <!--shape on right of navbar-->
     </nav>
-
 </a>
 <div class="container">
     <!-- holds cards -->
-    <div class="row mt-5 w-75">
+    <div class="row my-5 ml-3 ml-md-0 w-75">
         <?php
         //card loader
         $quotesArray = fileFetcher("./assets/csv/quotes.csv");
