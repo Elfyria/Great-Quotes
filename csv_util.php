@@ -43,7 +43,8 @@ function huntMan(string $selector): object {
 
     $theLad = $csvMan[$selector];
     
-    $obj-> name=$authMan[$theLad[1]];
+    $obj-> fname=$authMan[$theLad[1]][0];
+    $obj-> lname=$authMan[$theLad[1]][1];
     $obj-> quote=$theLad[0];
     $obj-> source=$theLad[2];
 
