@@ -32,32 +32,17 @@ function makeMan(string $quote, int $author, string $address): void {
  * @PARAM $selector string the key of the user you're looking to find
  * @return mixed returns reference to an array or index if found, if not, returns -1
  **/
-function huntMan(string $selector): object {
-    $obj= new stdClass();
-    $arr=[];
-    $arr2=[];
-    $count=0;
+function huntMan(string $selector) {
     $csvMan = fileFetcher("./assets/csv/quotes.csv");       //get the array
     $authMan = fileFetcher("./assets/csv/authors.csv");       //get the array
     if ($selector >= count($csvMan) || $selector < 0) {
         die("invalid selector");
     }
 
-
     $theLad = $csvMan[$selector];
-    for($i=0;$i,count($csvman);$i++){
-        if($csvman[$i][1]==$theLad[1]){
-        $arr[$count]=$csvman[$i][0];
-        $arr2[$count]=$csvman[$i][2];
-        $count++;}
-    }
-    
-    $obj-> fname=$authMan[$theLad[1]][0];
-    $obj-> lname=$authMan[$theLad[1]][1];
-    $obj-> quotes=$arr;
-    $obj-> sources=$arr2;
+    array_push($theLad, $authMan[$theLad[1]]);
 
-    return $obj;
+    return $theLad;
 }
 
 /**
